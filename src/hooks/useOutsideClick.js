@@ -16,5 +16,5 @@ export function useOutsideClick(handler, listenCapturing = true) {
     [handler, listenCapturing]
   );
 
-  return { ref };
+  return ref;
 }

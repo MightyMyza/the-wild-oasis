@@ -69,9 +69,10 @@ const MenusContext = createContext();
 
 function Menus({ children }) {
   const [openId, setOpenId] = useState("");
+  const [position, setPosition] = useState(null);
+
   const close = () => setOpenId("");
   const open = setOpenId;
-  const [position, setPosition] = useState(null);
 
   return (
     <MenusContext.Provider
@@ -87,6 +88,7 @@ function Toggle({ id }) {
 
   function handleClick(e) {
     e.stopPropagation();
+
     const rect = e.target.closest("button").getBoundingClientRect();
     setPosition({
       x: window.innerWidth - rect.width - rect.x,
@@ -102,6 +104,7 @@ function Toggle({ id }) {
     </StyledToggle>
   );
 }
+
 function List({ id, children }) {
   const { openId, position, close } = useContext(MenusContext);
   const ref = useOutsideClick(close, false);
@@ -127,7 +130,8 @@ function Button({ children, icon, onClick }) {
   return (
     <li>
       <StyledButton onClick={handleClick}>
-        {icon} <span>{children}</span>
+        {icon}
+        <span>{children}</span>
       </StyledButton>
     </li>
   );
